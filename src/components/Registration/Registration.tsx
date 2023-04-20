@@ -14,11 +14,8 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import Visibility from "@mui/icons-material/Visibility";
 import FormControl from "@mui/material/FormControl";
 import {AppUseSelector, useAppDispatch} from "../../store/store";
-import {setIsRegister} from "../../store/authReducer";
-import {v1} from "uuid";
+import {setRegistration} from "../../store/authReducer";
 import {useShowPassword} from "../../hooks/useShowPassword";
-import {users} from "../common/constants/localStorageConstants"
-
 
 export type RegistrationType = {
     email: string
@@ -41,13 +38,7 @@ export const Registration = () => {
 
 
     const onSubmit: SubmitHandler<RegistrationType> = (data) => {
-        if (users.some(elem => elem.email.toLowerCase() === data.email.toLowerCase())) {
-            return  alert('This Email already exists')
-        } else {
-            const newUser = {id: v1(), email: data.email, password: data.password}
-            localStorage.setItem('users', JSON.stringify([...users, newUser]))
-            dispatch(setIsRegister(true))
-        }
+        dispatch(setRegistration(data))
     }
 
     if (isRegister){

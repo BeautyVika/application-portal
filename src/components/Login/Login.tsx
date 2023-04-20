@@ -7,8 +7,7 @@ import {Navigate, NavLink} from "react-router-dom";
 import {PasswordInput} from "../common/components/PasswordInput/PasswordInput"
 import s from "./Login.module.css"
 import {AppUseSelector, useAppDispatch} from "../../store/store";
-import {setIsLoggedIn} from "../../store/authReducer";
-import {users} from "../common/constants/localStorageConstants";
+import {login} from "../../store/authReducer";
 
 export const regEmail = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/
 
@@ -28,13 +27,8 @@ export const Login = () => {
         formState: {errors}
     } = useForm<LoginType>()
 
-    const onSubmit: SubmitHandler<LoginType> = (data) => {
-        if (users.length > 0 && users.some(u => u.email.toLowerCase() === data.email.toLowerCase())) {
-            localStorage.setItem('user', JSON.stringify({email: data.email, password: data.password}))
-            dispatch(setIsLoggedIn(true))
-        } else {
-            alert("You are not registered or you have entered data incorrectly")
-        }
+    const onSubmit: SubmitHandler<LoginType> = (data: LoginType) => {
+        dispatch(login(data))
     }
 
     if (isLoggedIn){

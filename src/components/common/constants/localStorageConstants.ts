@@ -1,7 +1,3 @@
-export type UsersType = {
-    id: string
-    email: string
-    password: string
-}
+import {UserType} from "../../../store/authReducer";
 
-export const users: Array<UsersType> = JSON.parse(localStorage.getItem('users') || '[]')
+export const users: Array<UserType> = JSON.parse(localStorage.getItem('users') || '[]')

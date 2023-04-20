@@ -1,0 +1,14 @@
+.nav {
+  display:flex;
+  flex-flow:row wrap;
+  .toolBar{
+    display:flex;
+    justify-content:flex-end;
+    .email {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+}
+
