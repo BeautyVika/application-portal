@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect} from "react"
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -6,35 +6,35 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import {AppUseSelector} from "../../store/store";
+import {AppUseSelector, useAppDispatch} from "../../store/store";
+import Button from "@mui/material/Button";
+import {addNewApplication, getApplications} from "../../store/applicationReducer";
+import {v1} from "uuid";
 
 export const Portal = () => {
 
-    const currentUser = AppUseSelector(state => state.auth.user)
-    console.log(currentUser)
+    const applications = AppUseSelector(state => state.applications)
+    const userEmail =  AppUseSelector(state => state.auth.user.email)
+    console.log(userEmail)
+    const dispatch = useAppDispatch()
 
-    function createData(
-        name: string,
-        calories: number,
-        fat: number,
-        carbs: number,
-        protein: number,
-    ) {
-        return { name, calories, fat, carbs, protein };
+    useEffect(() => {
+        dispatch(getApplications())
+    }, [])
+
+    const addApplicationHandler = () => {
+        dispatch(addNewApplication(
+            {id: v1(), email: userEmail, topic: 'Hello', description: 'Hello everybody', date: '20.04.23' }))
     }
-
-    const rows = [
-        createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-        createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-        createData('Eclair', 262, 16.0, 24, 6.0),
-        createData('Cupcake', 305, 3.7, 67, 4.3),
-    ];
 
     return (
         <div style={{margin: '50px 50px 0'}}>
             <div>My applications</div>
 
+            <Button variant="contained" onClick={addApplicationHandler}>Add new application</Button>
+
             <TableContainer component={Paper}>
+                {applications.length > 0 ?
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                         <TableRow>
@@ -45,21 +45,22 @@ export const Portal = () => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {rows.map((row) => (
+                        {applications.map((app) => (
                             <TableRow
-                                key={row.name}
-                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                                key={app.id}
+                                sx={{'&:last-child td, &:last-child th': {border: 0}}}
                             >
                                 <TableCell component="th" scope="row">
-                                    {row.name}
+                                    {app.topic}
                                 </TableCell>
-                                <TableCell align="right">{row.calories}</TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
-                                <TableCell align="right">{row.carbs}</TableCell>
+                                <TableCell align="right">{app.description}</TableCell>
+                                <TableCell align="right">{app.date}</TableCell>
+                                <TableCell align="right">Action</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
+                : <div>You don't have applications</div>}
             </TableContainer>
         </div>
 

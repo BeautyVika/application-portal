@@ -2,9 +2,11 @@ import {AnyAction, applyMiddleware, combineReducers, legacy_createStore} from "r
 import {authReducer} from "../store/authReducer";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import thunk, {ThunkDispatch} from "redux-thunk";
+import {applicationsReducer} from "../store/applicationReducer";
 
 const rootReducers = combineReducers({
-    auth: authReducer
+    auth: authReducer,
+    applications: applicationsReducer,
 })
 
 
