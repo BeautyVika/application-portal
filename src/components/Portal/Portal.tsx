@@ -10,6 +10,7 @@ import {AppUseSelector, useAppDispatch} from "../../store/store";
 import Button from "@mui/material/Button";
 import {addNewApplication, getApplications} from "../../store/applicationReducer";
 import {v1} from "uuid";
+import {Actions} from "./Actions";
 
 export const Portal = () => {
 
@@ -55,7 +56,9 @@ export const Portal = () => {
                                 </TableCell>
                                 <TableCell align="right">{app.description}</TableCell>
                                 <TableCell align="right">{app.date}</TableCell>
-                                <TableCell align="right">Action</TableCell>
+                                <TableCell align="right">
+                                    <Actions/>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
