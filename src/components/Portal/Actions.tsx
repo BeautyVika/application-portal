@@ -1,15 +1,18 @@
-import React from 'react'
-
+import React, {FC} from 'react'
 import BorderColorIcon from '@mui/icons-material/BorderColor'
-import DeleteSweepIcon from '@mui/icons-material/DeleteSweep'
+import {DeleteModals} from "../../components/Modals/DeleteModals";
 
+type ActionsPropsType = {
+    appId: string
+    appName: string
+}
 
-export const Actions = () => {
+export const Actions: FC<ActionsPropsType> = ({appId,appName}) => {
 
     return (
         <div style={{marginRight: '14px'}}>
             <BorderColorIcon style={{marginRight: '8px'}}/>
-            <DeleteSweepIcon/>
+            <DeleteModals appId={appId} appName={appName}/>
         </div>
     )
 }

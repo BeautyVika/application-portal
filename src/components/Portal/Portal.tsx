@@ -7,10 +7,10 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {AppUseSelector, useAppDispatch} from "../../store/store";
-import Button from "@mui/material/Button";
 import {addNewApplication, getApplications} from "../../store/applicationReducer";
 import {v1} from "uuid";
 import {Actions} from "./Actions";
+import {AddModals, NewApplicationType} from "../Modals/AddModals";
 
 export const Portal = () => {
 
@@ -23,16 +23,18 @@ export const Portal = () => {
         dispatch(getApplications())
     }, [])
 
-    const addApplicationHandler = () => {
+    const addApplicationHandler = (data: NewApplicationType) => {
         dispatch(addNewApplication(
-            {id: v1(), email: userEmail, topic: 'Hello', description: 'Hello everybody', date: '20.04.23' }))
+            {id: v1(), email: userEmail, topic: data.topic, description: data.description, date: data.date }))
     }
 
     return (
         <div style={{margin: '50px 50px 0'}}>
             <div>My applications</div>
 
-            <Button variant="contained" onClick={addApplicationHandler}>Add new application</Button>
+            {/*<Button variant="contained" onClick={addApplicationHandler}>Add new application</Button>*/}
+
+            <AddModals onAddHandle={addApplicationHandler}/>
 
             <TableContainer component={Paper}>
                 {applications.length > 0 ?
@@ -55,9 +57,9 @@ export const Portal = () => {
                                     {app.topic}
                                 </TableCell>
                                 <TableCell align="right">{app.description}</TableCell>
-                                <TableCell align="right">{app.date}</TableCell>
+                                <TableCell align="right">data</TableCell>
                                 <TableCell align="right">
-                                    <Actions/>
+                                    <Actions appId={app.id} appName={app.topic}/>
                                 </TableCell>
                             </TableRow>
                         ))}

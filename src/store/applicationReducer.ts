@@ -8,7 +8,7 @@ export type ApplicationType = {
     email: string
     topic: string
     description: string
-    date: string
+    date: Date
 }
 
 type InitialStateType = typeof initialState
@@ -35,15 +35,27 @@ export const addNewApplication = (newApplication: ApplicationType) => (dispatch:
     localStorage.setItem('userApplications', JSON.stringify([...applications, newApplication]))
     dispatch(addApplication(newApplication))
 }
+
 export const getApplications = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
     const applications: Array<ApplicationType> = JSON.parse(localStorage.getItem('userApplications') || '[]')
+
     const currentUserEmail = getState().auth.user.email
+
     if(applications.length > 0) {
         const currentApplications = applications.filter((a) => a.email === currentUserEmail)
         dispatch(getApplicationsFromLocalStorage(currentApplications))
     }
 }
 
-type ActionType =
+export const deleteApplication = (id: string) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
+    const applications: Array<ApplicationType> = JSON.parse(localStorage.getItem('userApplications') || '[]')
+    const currentUserEmail = getState().auth.user.email
+
+    const applicationsAfterDelete = applications.filter(a => a.id !== id)
+    const newApplications = applicationsAfterDelete.filter(a => a.email === currentUserEmail)
+    localStorage.setItem('userApplications', JSON.stringify([...newApplications]))
+    dispatch(getApplicationsFromLocalStorage(newApplications))
+}
+    type ActionType =
     | ReturnType<typeof addApplication>
     | ReturnType<typeof getApplicationsFromLocalStorage>
