@@ -10,7 +10,7 @@ import {AppUseSelector, useAppDispatch} from "../../store/store";
 import {addNewApplication, getApplications} from "../../store/applicationReducer";
 import {v1} from "uuid";
 import {Actions} from "./Actions";
-import {AddModals, NewApplicationType} from "../Modals/AddModals";
+import {AddModals, NewApplicationType} from "../Modals/AddModals"
 
 export const Portal = () => {
 

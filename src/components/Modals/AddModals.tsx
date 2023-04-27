@@ -28,6 +28,8 @@ export const AddModals: FC<AddPackModalPropsType> = ({onAddHandle}) => {
 
     const { register, handleSubmit, reset, control } = useForm<NewApplicationType>()
 
+    const [value, setValue] = React.useState<Date | null>(null);
+
     const onSubmit: SubmitHandler<NewApplicationType> = (data) => {
         onAddHandle(data)
         handleClose()
@@ -52,6 +54,7 @@ export const AddModals: FC<AddPackModalPropsType> = ({onAddHandle}) => {
                         label="Enter topic"
                         variant="standard"
                         {...register('topic', {
+                            required: 'This field is a required field!',
                             maxLength: { value: 12, message: 'Maximum length of password is 12 symbols' }
                         } )}
                     />
@@ -62,17 +65,19 @@ export const AddModals: FC<AddPackModalPropsType> = ({onAddHandle}) => {
                         label="Enter description"
                         variant="standard"
                         {...register('description', {
+                            required: 'This field is a required field!',
                             maxLength: { value: 30, message: 'Maximum length of password is 30 symbols' }
                         })}
                     />
                     <Controller
                         control={control}
                         name="date"
-                        render={({ field: { ref, onBlur, name, ...field }, fieldState }) => (
+                        rules={{required: 'Date is reguared'}}
+                        render={({ field: {name, ...field }, fieldState }) => (
                             <DatePicker
                                 {...field}
-                                inputRef={ref}
                                 label="Enter date"
+                                value={value}
                             />
                         )}
                     />

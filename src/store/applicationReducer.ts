@@ -60,7 +60,7 @@ export const deleteApplication = (id: string) => (dispatch: Dispatch, getState: 
 
     const applicationsAfterDelete = applications.filter(a => a.id !== id)
     const newApplications = applicationsAfterDelete.filter(a => a.email === currentUserEmail)
-    localStorage.setItem('userApplications', JSON.stringify([...newApplications]))
+    localStorage.setItem('userApplications', JSON.stringify([...applicationsAfterDelete]))
     dispatch(getApplicationsFromLocalStorage(newApplications))
 }
 export const updateApplication = (id: string, data: Omit<ApplicationType, 'id' | 'email'>) =>
