@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {AppRootStateType} from "../store/store";
+import {applications} from "../components/common/constants/localStorageConstants";
 
 let initialState: Array<ApplicationType> = []
 
@@ -19,6 +20,10 @@ export const applicationsReducer = (state = initialState, action: ActionType): I
             return [...state, {...action.newApplication}]
         case "GET-APPLICATIONS":
             return [...action.applications]
+        case "EDIT-APPLICATIONS":
+            return state.map(app => app.id === action.id
+                ? {id: app.id, email: app.email, ...action.editApplication}
+                : app)
     }
     return state
 }
@@ -29,9 +34,11 @@ export const addApplication = (newApplication: ApplicationType) => {
 export const getApplicationsFromLocalStorage = (applications: Array<ApplicationType>) => {
     return {type: "GET-APPLICATIONS", applications} as const
 }
+export const editApplication = (id: string, editApplication: Omit<ApplicationType, 'id' | 'email'>) => {
+    return {type: "EDIT-APPLICATIONS", id, editApplication} as const
+}
 //thunks
 export const addNewApplication = (newApplication: ApplicationType) => (dispatch: Dispatch) => {
-    const applications: Array<ApplicationType> = JSON.parse(localStorage.getItem('userApplications') || '[]')
     localStorage.setItem('userApplications', JSON.stringify([...applications, newApplication]))
     dispatch(addApplication(newApplication))
 }
@@ -56,6 +63,14 @@ export const deleteApplication = (id: string) => (dispatch: Dispatch, getState: 
     localStorage.setItem('userApplications', JSON.stringify([...newApplications]))
     dispatch(getApplicationsFromLocalStorage(newApplications))
 }
-    type ActionType =
+export const updateApplication = (id: string, data: Omit<ApplicationType, 'id' | 'email'>) =>
+    (dispatch: Dispatch) => {
+
+        localStorage.setItem('userApplications', JSON.stringify(applications.map(app => app.id === id ? {...app, ...data}: app)))
+        dispatch(editApplication(id, data))
+    }
+
+type ActionType =
     | ReturnType<typeof addApplication>
     | ReturnType<typeof getApplicationsFromLocalStorage>
+    | ReturnType<typeof editApplication>

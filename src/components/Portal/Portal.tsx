@@ -16,7 +16,6 @@ export const Portal = () => {
 
     const applications = AppUseSelector(state => state.applications)
     const userEmail =  AppUseSelector(state => state.auth.user.email)
-    console.log(userEmail)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -57,9 +56,12 @@ export const Portal = () => {
                                     {app.topic}
                                 </TableCell>
                                 <TableCell align="right">{app.description}</TableCell>
-                                <TableCell align="right">data</TableCell>
+                                <TableCell align="right">{new Date(app.date).toDateString()}</TableCell>
                                 <TableCell align="right">
-                                    <Actions appId={app.id} appName={app.topic}/>
+                                    <Actions appId={app.id}
+                                             appName={app.topic}
+                                             appDescription={app.description}
+                                             appDate={app.date}/>
                                 </TableCell>
                             </TableRow>
                         ))}

@@ -1,17 +1,23 @@
 import React, {FC} from 'react'
-import BorderColorIcon from '@mui/icons-material/BorderColor'
+
 import {DeleteModals} from "../../components/Modals/DeleteModals";
+import {EditModals} from "../../components/Modals/EditModals";
 
 type ActionsPropsType = {
     appId: string
     appName: string
+    appDescription: string
+    appDate: Date
 }
 
-export const Actions: FC<ActionsPropsType> = ({appId,appName}) => {
+export const Actions: FC<ActionsPropsType> = ({appId, appName, appDescription, appDate}) => {
 
     return (
         <div style={{marginRight: '14px'}}>
-            <BorderColorIcon style={{marginRight: '8px'}}/>
+            <EditModals appId={appId}
+                        appName={appName}
+                        appDescription={appDescription}
+                        appDate={appDate}/>
             <DeleteModals appId={appId} appName={appName}/>
         </div>
     )

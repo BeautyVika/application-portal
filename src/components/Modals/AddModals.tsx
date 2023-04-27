@@ -51,7 +51,9 @@ export const AddModals: FC<AddPackModalPropsType> = ({onAddHandle}) => {
                         id="topic"
                         label="Enter topic"
                         variant="standard"
-                        {...register('topic' )}
+                        {...register('topic', {
+                            maxLength: { value: 12, message: 'Maximum length of password is 12 symbols' }
+                        } )}
                     />
                     <TextField
                         margin="normal"
