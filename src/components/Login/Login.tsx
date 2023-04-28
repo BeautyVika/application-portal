@@ -32,7 +32,7 @@ export const Login = () => {
     }
 
     if (isLoggedIn){
-        return <Navigate to={'/portal'}/>
+        return <Navigate to={'/profile'}/>
     }
 
     return (

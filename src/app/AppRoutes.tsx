@@ -4,6 +4,7 @@ import {Registration} from "../components/Registration/Registration";
 import {Portal} from "../components/Portal/Portal";
 import React from "react";
 import {PrivateRoutes} from "../app/PrivateRoutes";
+import {Profile} from "../components/Profile/Profile";
 
 export const AppRoutes = () => {
     return (
@@ -13,6 +14,7 @@ export const AppRoutes = () => {
             <Route path={'/registration'} element={<Registration/>}/>
 
             <Route element={<PrivateRoutes/>}>
+                <Route path={'/profile'} element={<Profile/>}/>
                 <Route path={'/portal'} element={<Portal/>}/>
             </Route>
         </Routes>)

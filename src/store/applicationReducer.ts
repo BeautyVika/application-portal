@@ -44,8 +44,6 @@ export const addNewApplication = (newApplication: ApplicationType) => (dispatch:
 }
 
 export const getApplications = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
-    const applications: Array<ApplicationType> = JSON.parse(localStorage.getItem('userApplications') || '[]')
-
     const currentUserEmail = getState().auth.user.email
 
     if(applications.length > 0) {
@@ -55,7 +53,6 @@ export const getApplications = () => (dispatch: Dispatch, getState: () => AppRoo
 }
 
 export const deleteApplication = (id: string) => (dispatch: Dispatch, getState: () => AppRootStateType) => {
-    const applications: Array<ApplicationType> = JSON.parse(localStorage.getItem('userApplications') || '[]')
     const currentUserEmail = getState().auth.user.email
 
     const applicationsAfterDelete = applications.filter(a => a.id !== id)
@@ -66,7 +63,8 @@ export const deleteApplication = (id: string) => (dispatch: Dispatch, getState: 
 export const updateApplication = (id: string, data: Omit<ApplicationType, 'id' | 'email'>) =>
     (dispatch: Dispatch) => {
 
-        localStorage.setItem('userApplications', JSON.stringify(applications.map(app => app.id === id ? {...app, ...data}: app)))
+        localStorage.setItem('userApplications',
+            JSON.stringify(applications.map(app => app.id === id ? {...app, ...data}: app)))
         dispatch(editApplication(id, data))
     }
 

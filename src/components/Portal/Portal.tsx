@@ -11,12 +11,15 @@ import {addNewApplication, getApplications} from "../../store/applicationReducer
 import {v1} from "uuid";
 import {Actions} from "./Actions";
 import {AddModals, NewApplicationType} from "../Modals/AddModals"
+import Button from "@mui/material/Button";
+import {useNavigate} from "react-router-dom";
 
 export const Portal = () => {
 
     const applications = AppUseSelector(state => state.applications)
     const userEmail =  AppUseSelector(state => state.auth.user.email)
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
         dispatch(getApplications())
@@ -27,11 +30,14 @@ export const Portal = () => {
             {id: v1(), email: userEmail, topic: data.topic, description: data.description, date: data.date }))
     }
 
+    const onProfileHandler = () => {
+        return navigate('/profile')
+    }
+
     return (
         <div style={{margin: '50px 50px 0'}}>
+            <Button variant="contained" onClick={onProfileHandler}>Back to profile</Button>
             <div>My applications</div>
-
-            {/*<Button variant="contained" onClick={addApplicationHandler}>Add new application</Button>*/}
 
             <AddModals onAddHandle={addApplicationHandler}/>
 

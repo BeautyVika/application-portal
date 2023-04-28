@@ -3,10 +3,12 @@ import {authReducer} from "../store/authReducer";
 import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
 import thunk, {ThunkDispatch} from "redux-thunk";
 import {applicationsReducer} from "../store/applicationReducer";
+import {profileReducer} from "../store/profileReducer";
 
 const rootReducers = combineReducers({
     auth: authReducer,
     applications: applicationsReducer,
+    profile: profileReducer
 })
 
 
