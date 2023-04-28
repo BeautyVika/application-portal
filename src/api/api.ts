@@ -9,6 +9,16 @@ export const currencyAPI = {
     }
 }
 
+const instance = axios.create({
+    baseURL: 'https://api.openweathermap.org/data/2.5/'
+})
+
+export const weatherAPI = {
+    getWeather(){
+        return instance.get('weather?q=Minsk&appid=de7319e3b6e6e2c0cf78088a9890842b&units=metric')
+    }
+}
+
 export type CurrencyReturnType = {
     Cur_ID: number
     Date: string,
