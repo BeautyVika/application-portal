@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import IconButton from '@mui/material/IconButton';
 import {logout} from "../../store/authReducer";
+import AppsIcon from '@mui/icons-material/Apps';
 
 export const Header = () => {
     const isLoggedIn = AppUseSelector(state => state.auth.isLoggedIn)
@@ -24,14 +25,21 @@ export const Header = () => {
         <div className={s.nav}>
             <AppBar position="static" color={'inherit'}>
                 <Toolbar className={s.toolBar}>
+                    <AppsIcon sx={{color: '#0BB7A5'}} fontSize={"large"}/>
                     {isLoggedIn
                         ? <div className={s.email}>
                             <span>{currentUser.email}</span>
                             <IconButton onClick={exitHandler}>
-                                <ExitToAppIcon/>
+                                <ExitToAppIcon sx={{color: '#0BB7A5'}}/>
                             </IconButton>
-                          </div>
-                        : <Button onClick={loginHandler}>Sing In</Button>
+                        </div>
+                        : <Button variant={'outlined'}
+                                  color={'success'}
+                                  sx={{borderColor: '#0BB7A5', color: '#0BB7A5'}}
+                                  onClick={loginHandler}
+                        >
+                            Sing In
+                        </Button>
                     }
                 </Toolbar>
             </AppBar>

@@ -43,6 +43,12 @@ export const addNewApplication = (newApplication: ApplicationType) => (dispatch:
     dispatch(addApplication(newApplication))
 }
 
+export const getAllApplications = () => (dispatch: Dispatch) => {
+    if(applications.length > 0) {
+        dispatch(getApplicationsFromLocalStorage(applications))
+    }
+}
+
 export const getApplications = () => (dispatch: Dispatch, getState: () => AppRootStateType) => {
     const currentUserEmail = getState().auth.user.email
 

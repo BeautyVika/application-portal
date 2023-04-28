@@ -7,6 +7,7 @@ import TextField from "@mui/material/TextField/TextField";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import {ModalsButton} from "../common/components/ModalsButton/ModalsButton";
 
 type AddPackModalPropsType = {
     onAddHandle: (data: NewApplicationType) => void
@@ -37,7 +38,7 @@ export const AddModals: FC<AddPackModalPropsType> = ({onAddHandle}) => {
 
     return (
         <>
-            <Button onClick={handleOpen}>Add new application</Button>
+            <Button sx={{color: '#0BB7A5', cursor: 'pointer'}} onClick={handleOpen}>Add new application</Button>
 
             <BasicModal open={open} handleClose={handleClose}>
                 <Typography variant="h6" component="h2">
@@ -75,6 +76,7 @@ export const AddModals: FC<AddPackModalPropsType> = ({onAddHandle}) => {
                         rules={{required: 'Date is reguared'}}
                         render={({ field: {name, ...field }, fieldState }) => (
                             <DatePicker
+                                sx={{m: 1, width: '347px'}}
                                 {...field}
                                 label="Enter date"
                                 value={value}
@@ -83,12 +85,7 @@ export const AddModals: FC<AddPackModalPropsType> = ({onAddHandle}) => {
                     />
 
                     <Typography sx={{ mt: 2 }} display={'flex'} justifyContent={'space-between'}>
-                        <Button variant={'outlined'} onClick={handleClose}>
-                            Cancel
-                        </Button>
-                        <Button variant={'contained'} color={'primary'} type={'submit'}>
-                            Save
-                        </Button>
+                        <ModalsButton handleClose={handleClose}/>
                     </Typography>
                 </form>
                 </LocalizationProvider>

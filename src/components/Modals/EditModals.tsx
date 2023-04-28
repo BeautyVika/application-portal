@@ -12,6 +12,7 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import {updateApplication} from "../../store/applicationReducer";
 import {useAppDispatch} from "../../store/store";
+import {ModalsButton} from "../common/components/ModalsButton/ModalsButton";
 
 type EditModalsPropsType = {
     appId: string
@@ -33,8 +34,6 @@ export const EditModals: FC<EditModalsPropsType> = ({
         setOpen(false)
     }
     const dispatch = useAppDispatch()
-
-    const [value, setValue] = React.useState<Date>(new Date(appDate))
 
     const {register, handleSubmit, control} = useForm<NewApplicationType>()
 
@@ -84,20 +83,14 @@ export const EditModals: FC<EditModalsPropsType> = ({
                                 <DatePicker
                                     {...field}
                                     inputRef={ref}
+                                    sx={{m: 1, width: '347px'}}
                                     label="Enter date"
-                                    // value={value}
-                                    // onChange={(newValue) => setValue(newValue || value)}
                                     defaultValue={new Date(appDate)}
                                 />
                             )}
                         />
                         <Typography sx={{mt: 2}} display={'flex'} justifyContent={'space-between'}>
-                            <Button variant={'outlined'} onClick={handleClose}>
-                                Cancel
-                            </Button>
-                            <Button variant={'contained'} color={'primary'} type={'submit'}>
-                                Save
-                            </Button>
+                            <ModalsButton handleClose={handleClose}/>
                         </Typography>
                     </form>
                 </LocalizationProvider>

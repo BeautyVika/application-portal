@@ -1,7 +1,7 @@
 import React, {FC} from 'react'
 
-import {DeleteModals} from "../../components/Modals/DeleteModals";
-import {EditModals} from "../../components/Modals/EditModals";
+import {DeleteModals} from "../../Modals/DeleteModals";
+import {EditModals} from "../../Modals/EditModals";
 
 type ActionsPropsType = {
     appId: string

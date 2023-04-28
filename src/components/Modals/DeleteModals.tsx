@@ -40,7 +40,10 @@ export const DeleteModals: FC<DeleteModalType> = ({appId, appName}) => {
                     Your application will be deleted
                 </Typography>
                 <Typography sx={{mt: 2}} display={'flex'} justifyContent={'space-between'}>
-                    <Button variant={'outlined'} onClick={handleClose}>
+                    <Button variant={'outlined'}
+                            color={'success'}
+                            sx={{borderColor: '#0BB7A5', color: '#0BB7A5'}}
+                            onClick={handleClose}>
                         Cancel
                     </Button>
                     <Button variant={'contained'} color={'error'} onClick={() => onDeleteAppHandler(appId)}>

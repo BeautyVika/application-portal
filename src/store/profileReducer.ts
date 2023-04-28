@@ -2,14 +2,14 @@ import {Dispatch} from "redux";
 import {currencyAPI, weatherAPI} from "../api/api";
 
 let initialState: InitialStateType = {
-    usd: null,
-    eur: null,
-    temp: null
+    usd: 0,
+    eur: 0,
+    temp: 0,
 }
 type InitialStateType = {
-    usd: null | number
-    eur: null | number
-    temp: null | number
+    usd: number
+    eur: number
+    temp: number
 }
 
 export const profileReducer = (state = initialState, action: ActionType): InitialStateType => {
@@ -20,17 +20,18 @@ export const profileReducer = (state = initialState, action: ActionType): Initia
             return {...state, eur: action.eur}
         case "GET-WEATHER":
             return {...state, temp: action.temp}
+
     }
     return state
 }
 
-export const getUSD = (usd: null | number) => {
+export const getUSD = (usd: number) => {
     return {type: 'GET-CURRENCY-USD', usd} as const
 }
-export const getEUR = (eur: null | number) => {
+export const getEUR = (eur: number) => {
     return {type: 'GET-CURRENCY-EUR', eur} as const
 }
-export const getWeather = (temp: null | number) => {
+export const getWeather = (temp: number) => {
     return {type: 'GET-WEATHER', temp} as const
 }
 
