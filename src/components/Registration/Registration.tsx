@@ -1,11 +1,10 @@
-import React from "react"
-import s from "../Login/Login.module.css"
+import React from "react";
+import s from "../Login/Login.module.scss";
 import {PasswordInput} from "../common/components/PasswordInput/PasswordInput";
 import TextField from "@mui/material/TextField/TextField";
 import Button from "@mui/material/Button";
 import {Navigate, NavLink} from "react-router-dom";
 import {SubmitHandler, useForm} from "react-hook-form";
-import {regEmail} from "../Login/Login";
 import InputLabel from "@mui/material/InputLabel";
 import Input from "@mui/material/Input";
 import InputAdornment from "@mui/material/InputAdornment";
@@ -16,6 +15,8 @@ import FormControl from "@mui/material/FormControl";
 import {AppUseSelector, useAppDispatch} from "../../store/store";
 import {setRegistration} from "../../store/authReducer";
 import {useShowPassword} from "../../hooks/useShowPassword";
+import {regEmail} from "../common/constants/regEmail";
+import Paper from "@mui/material/Paper";
 
 export type RegistrationType = {
     email: string
@@ -46,6 +47,7 @@ export const Registration = () => {
     }
 
     return <div className={s.containerLogin}>
+        <Paper elevation={3} sx={{height: '390px'}}>
         <div className={s.title}>
             Sign up
         </div>
@@ -95,15 +97,22 @@ export const Registration = () => {
 
 
             <div style={{ display: 'flex', justifyContent: "center", marginTop: "20px"}}>
-                <Button variant={'outlined'} type={'submit'}>Sign up</Button>
+                <Button variant={'outlined'}
+                        type={'submit'}
+                        color={'success'}
+                        sx={{borderColor: '#0BB7A5', color: '#0BB7A5'}}
+                >
+                    Sign up
+                </Button>
             </div>
 
             <div className={s.info}>
                 <span style={{marginBottom: "10px"}}>Already have an account?</span>
-                <NavLink to={'/login'} >
+                <NavLink to={'/login'} className={s.link}>
                     Sign in
                 </NavLink>
             </div>
         </form>
+        </Paper>
     </div>
 }
