@@ -38,8 +38,10 @@ export const Portal = () => {
 
             <AddModals onAddHandle={addApplicationHandler}/>
 
-            <TableContainer component={Paper}>
-                {applications.length > 0 ? <PortalTable /> : <div>You don't have applications</div>}
+            <TableContainer sx={{ marginTop: '20px' }} component={Paper}>
+                {applications.length > 0
+                    ? <PortalTable />
+                    : <div className={s.empty}>You don't have applications</div>}
             </TableContainer>
         </div>
 

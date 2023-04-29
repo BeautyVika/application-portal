@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {AppRootStateType} from "../store/store";
+import {AppRootStateType} from "./store";
 import {applications} from "../components/common/constants/localStorageConstants";
 
 let initialState: Array<ApplicationType> = []

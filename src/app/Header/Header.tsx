@@ -1,6 +1,6 @@
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import {useNavigate} from 'react-router-dom'
+import React from "react";
+
+import {useNavigate} from "react-router-dom";
 import {AppUseSelector, useAppDispatch} from "../../store/store";
 import s from "./Header.module.scss";
 import Button from "@mui/material/Button";
@@ -8,6 +8,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import IconButton from '@mui/material/IconButton';
 import {logout} from "../../store/authReducer";
 import AppsIcon from '@mui/icons-material/Apps';
+import {AppBar, Toolbar} from "@mui/material";
 
 export const Header = () => {
     const isLoggedIn = AppUseSelector(state => state.auth.isLoggedIn)

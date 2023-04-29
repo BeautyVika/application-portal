@@ -31,9 +31,16 @@ export const Profile = () => {
                 textAlign: 'center',
                 fontSize: '1.2rem'
             }}>
-                <div className={s.container}><ThermostatIcon sx={{color: '#0BB7A5'}}/> Weather in Minsk: {Math.round(temp)} °C</div>
-                <div className={s.container}><AttachMoneyIcon sx={{color: '#0BB7A5'}}/>  {usd}</div>
-                <div className={s.container}><EuroIcon sx={{color: '#0BB7A5'}}/> {eur}</div>
+                <div className={s.container}>
+                    <ThermostatIcon sx={{color: '#0BB7A5'}}/>
+                    Weather in Minsk: {Math.round(temp)} °C
+                </div>
+                <div className={s.container}>
+                    <AttachMoneyIcon sx={{color: '#0BB7A5'}}/>{usd}
+                </div>
+                <div className={s.container}>
+                    <EuroIcon sx={{color: '#0BB7A5'}}/>{eur}
+                </div>
             </Paper>
 
     )

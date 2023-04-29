@@ -27,7 +27,7 @@ export const DeleteModals: FC<DeleteModalType> = ({appId, appName}) => {
     return (
         <>
             <IconButton onClick={handleOpen}>
-                <DeleteSweepIcon/>
+                <DeleteSweepIcon sx={{color: '#0BB7A5'}}/>
             </IconButton>
 
             <BasicModal open={open} handleClose={handleClose}>

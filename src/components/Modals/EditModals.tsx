@@ -6,7 +6,6 @@ import {NewApplicationType} from "../Modals/AddModals";
 import {BasicModal} from "../Modals/BasicModals";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField/TextField";
-import Button from "@mui/material/Button";
 import {DatePicker} from "@mui/x-date-pickers/DatePicker";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -45,7 +44,7 @@ export const EditModals: FC<EditModalsPropsType> = ({
     return (
         <>
             <IconButton onClick={handleOpen}>
-                <BorderColorIcon style={{marginRight: '8px'}}/>
+                <BorderColorIcon sx={{color: '#0BB7A5', marginRight: '8px'}}/>
             </IconButton>
             <BasicModal open={open} handleClose={handleClose}>
                 <Typography variant="h5" component="h2">
@@ -60,6 +59,7 @@ export const EditModals: FC<EditModalsPropsType> = ({
                             id="topic"
                             label="Enter topic"
                             variant="standard"
+                            color={'success'}
                             defaultValue={appName}
                             {...register('topic', {
                                 maxLength: {value: 12, message: 'Maximum length of password is 12 symbols'}
@@ -71,6 +71,7 @@ export const EditModals: FC<EditModalsPropsType> = ({
                             id="description"
                             label="Enter description"
                             variant="standard"
+                            color={'success'}
                             defaultValue={appDescription}
                             {...register('description', {
                                 maxLength: {value: 30, message: 'Maximum length of password is 30 symbols'}

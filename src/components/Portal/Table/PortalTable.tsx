@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
@@ -7,30 +8,28 @@ import {Actions} from "../Actions/Actions";
 import Table from "@mui/material/Table";
 import {AppUseSelector} from "../../../store/store";
 
+const titleHeadTable = ['Topic', 'Description', 'Date of creation', 'Action']
+
 export const PortalTable = () => {
     const applications = AppUseSelector(state => state.applications)
 
-    return <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    return <Table sx={{ minWidth: '650px'}} aria-label="simple table">
         <TableHead>
-            <TableRow>
-                <TableCell>Topic</TableCell>
-                <TableCell align="right">Description</TableCell>
-                <TableCell align="right">Date of creation</TableCell>
-                <TableCell align="right">Action</TableCell>
+            <TableRow sx={{backgroundColor: '#7a7a7a'}}>
+                {titleHeadTable.map(t =>
+                    <TableCell sx={{width: '28%', fontSize: '1.2rem'}}>{t}</TableCell>)}
             </TableRow>
         </TableHead>
         <TableBody>
             {applications.map((app) => (
                 <TableRow
-                    key={app.id}
-                    sx={{'&:last-child td, &:last-child th': {border: 0}}}
-                >
+                    key={app.id}>
                     <TableCell component="th" scope="row">
                         {app.topic}
                     </TableCell>
-                    <TableCell align="right">{app.description}</TableCell>
-                    <TableCell align="right">{new Date(app.date).toDateString()}</TableCell>
-                    <TableCell align="right">
+                    <TableCell align="left">{app.description}</TableCell>
+                    <TableCell align="left">{new Date(app.date).toDateString()}</TableCell>
+                    <TableCell align="left">
                         <Actions appId={app.id}
                                  appName={app.topic}
                                  appDescription={app.description}

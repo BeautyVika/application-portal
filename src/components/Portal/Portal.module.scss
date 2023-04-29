@@ -6,12 +6,20 @@
     justify-content: space-between;
     .title{
       color: #4d4d4d;
-      font-size: 2em;
+      font-size: 2rem;
       font-weight: 300;
       line-height: 1.5;
       text-decoration: underline;
       text-decoration-color: #0BB7A5;
     }
   }
-
+  .empty{
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+    color: #4d4d4d;
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.5;
+  }
 }

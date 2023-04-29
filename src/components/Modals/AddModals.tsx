@@ -54,6 +54,7 @@ export const AddModals: FC<AddPackModalPropsType> = ({onAddHandle}) => {
                         id="topic"
                         label="Enter topic"
                         variant="standard"
+                        color={'success'}
                         {...register('topic', {
                             required: 'This field is a required field!',
                             maxLength: { value: 12, message: 'Maximum length of password is 12 symbols' }
@@ -65,6 +66,7 @@ export const AddModals: FC<AddPackModalPropsType> = ({onAddHandle}) => {
                         id="description"
                         label="Enter description"
                         variant="standard"
+                        color={'success'}
                         {...register('description', {
                             required: 'This field is a required field!',
                             maxLength: { value: 30, message: 'Maximum length of password is 30 symbols' }

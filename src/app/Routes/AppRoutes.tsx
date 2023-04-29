@@ -1,10 +1,11 @@
-import {Route, Routes} from "react-router-dom";
-import {Login} from "../components/Login/Login";
-import {Registration} from "../components/Registration/Registration";
-import {Portal} from "../components/Portal/Portal";
 import React from "react";
-import {PrivateRoutes} from "../app/PrivateRoutes";
-import {Profile} from "../components/Profile/Profile";
+
+import {Route, Routes} from "react-router-dom";
+import {Login} from "../../components/Login/Login";
+import {Registration} from "../../components/Registration/Registration";
+import {Portal} from "../../components/Portal/Portal";
+import {PrivateRoutes} from "../../app/Routes/PrivateRoutes";
+import {Profile} from "../../components/Profile/Profile";
 
 export const AppRoutes = () => {
     return (
