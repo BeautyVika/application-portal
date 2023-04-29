@@ -15,7 +15,6 @@ export const Profile = () => {
 
     const dispatch = useAppDispatch()
 
-
     useEffect(() => {
         dispatch(getCurrencyUSD())
         dispatch(getCurrencyEUR())

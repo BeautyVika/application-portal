@@ -4,6 +4,7 @@ import {AppRoutes} from "./Routes/AppRoutes";
 import {Header} from "../app/Header/Header";
 import {useAppDispatch} from "../store/store";
 import {getUser} from "../store/authReducer";
+import {InfoSnackBar} from "../components/common/components/InfoSnackbar/InfoSnackbar";
 
 function App() {
     const dispatch = useAppDispatch()
@@ -15,7 +16,9 @@ function App() {
   return (
       <div>
           <Header/>
+          <InfoSnackBar/>
           <AppRoutes/>
+
       </div>
   )
 }

@@ -7,17 +7,22 @@ import {LoginType} from "../components/Login/Login";
 let initialState = {
     isLoggedIn: false,
     isRegister: false,
-    user: {} as UserType
+    user: {} as UserType,
+    info: null
 }
 export type UserType = {
     id: string
     email: string
     password: string
 }
+type InitialStateType = {
+    isLoggedIn: boolean
+    isRegister: boolean
+    info: string | null
+    user: UserType
+}
 
-type InitialStateType = typeof initialState
-
-export const authReducer = (state = initialState, action: ActionType): InitialStateType => {
+export const authReducer = (state:InitialStateType  = initialState, action: ActionType): InitialStateType => {
     switch (action.type) {
         case "SET-IS-LOGGED":
             return {...state, isLoggedIn: action.isLoggedIn}
@@ -25,6 +30,8 @@ export const authReducer = (state = initialState, action: ActionType): InitialSt
             return {...state, isRegister: action.isRegister}
         case "SET-CURRENT-USER":
             return {...state, user: action.currentUser}
+        case "SET-AUTH-INFO":
+            return {...state, info: action.info}
     }
     return state
 }
@@ -38,10 +45,13 @@ export const setIsRegister = (isRegister: boolean) => {
 export const setCurrentUser = (currentUser: UserType) => {
     return {type: 'SET-CURRENT-USER', currentUser} as const
 }
+export const setAuthInfo = (info: string | null) => {
+    return {type: "SET-AUTH-INFO", info} as const
+}
 //thunks
 export const setRegistration = (data: RegistrationType) => (dispatch: Dispatch) => {
     if (users.some(elem => elem.email.toLowerCase() === data.email.toLowerCase())) {
-        return  alert('This Email already exists')
+        dispatch(setAuthInfo('This Email already exists'))
     } else {
         const newUser = {id: v1(), email: data.email, password: data.password}
         localStorage.setItem('users', JSON.stringify([...users, newUser]))
@@ -49,13 +59,16 @@ export const setRegistration = (data: RegistrationType) => (dispatch: Dispatch) 
     }
 }
 export const login = (data: LoginType) => (dispatch: Dispatch) => {
-    if (users.length > 0 && users.some(u => u.email.toLowerCase() === data.email.toLowerCase())) {
+    if (users.length > 0
+        && users.some(u => u.email.toLowerCase() === data.email.toLowerCase())
+        && users.some(u => u.password.toLowerCase() === data.password.toLowerCase())) {
+
         localStorage.setItem('user', JSON.stringify({id: v1(), email: data.email, password: data.password}))
         const currentUser = JSON.parse(localStorage.getItem('user') || "{}")
         dispatch(setCurrentUser(currentUser))
         dispatch(setIsLoggedIn(true))
     } else {
-        alert("You are not registered or you have entered data incorrectly")
+        dispatch(setAuthInfo('You are not registered or you have entered data incorrectly'))
     }
 }
 export const logout = () => (dispatch: Dispatch) =>{
@@ -69,7 +82,7 @@ export const getUser = () => (dispatch: Dispatch) => {
         dispatch(setCurrentUser(userFromLocalStorage))
         dispatch(setIsLoggedIn(true))
     }else {
-        alert("You need to be logged in to continue.")
+        dispatch(setAuthInfo('You need to be logged in to continue.'))
     }
 }
 
@@ -77,3 +90,4 @@ type ActionType =
     | ReturnType<typeof setIsLoggedIn>
     | ReturnType<typeof setIsRegister>
     | ReturnType<typeof setCurrentUser>
+    | ReturnType<typeof setAuthInfo>

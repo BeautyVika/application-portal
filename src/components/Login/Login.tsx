@@ -49,6 +49,7 @@ export const Login = () => {
                         id="email"
                         label="Email Address"
                         variant="standard"
+                        color={'success'}
                         error={!!errors.email}
                         helperText={errors.email?.message}
                         {...register('email', {

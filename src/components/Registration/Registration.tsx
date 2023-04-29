@@ -58,6 +58,7 @@ export const Registration = () => {
                 id="email"
                 label="Email Address"
                 variant="standard"
+                color={'success'}
                 error={!!errors.email}
                 helperText={errors.email?.message}
                 {...register('email', {
@@ -73,6 +74,7 @@ export const Registration = () => {
                     id={"confirmPassword"}
                     type={showPassword ? "text" : "password"}
                     error={!!errors.confirmPassword}
+                    color={'success'}
                     {...register("confirmPassword", {
                         required: 'Password is a required field!',
                         minLength: { value: 6, message: 'Minimum length of password is 6 symbols' },

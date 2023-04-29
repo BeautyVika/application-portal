@@ -21,11 +21,5 @@ export const useAppDispatch: () => AppDispatch = useDispatch
 export type AppRootStateType = ReturnType<typeof store.getState>
 export type AppDispatch = ThunkDispatch<AppRootStateType, any, AnyAction>
 
-// store.subscribe(() => {
-//     saveState({
-//         user: store.getState().auth.user
-//     })
-// })
-
 // @ts-ignore
 window.store = store
